@@ -1,0 +1,25 @@
+version: '3'
+services:
+  sakaba-api:
+    build: .
+    depends_on:
+      - db
+    command:
+      - go
+      - run
+      - main.go
+    ports:
+      - '8080:8080'
+    volumes:
+      - .:/go/src
+    environment:
+      TZ: Asia/Tokyo
+  db:
+    image: mysql:8.0
+    ports:
+      - '3307:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: test_user
+      MYSQL_PASSWORD: test
+      TZ: Asia/Tokyo
