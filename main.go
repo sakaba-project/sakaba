@@ -4,7 +4,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"io/ioutil"
 
-	"github.com/sakaba-project/sakaba/config"
 	"github.com/sakaba-project/sakaba/controllers"
 	"github.com/sakaba-project/sakaba/db"
 )
@@ -34,8 +33,6 @@ func setupRouter(isRelease bool) *gin.Engine {
 }
 
 func main() {
-	config.InitConfig()
-
 	db.AutoMigrate()
 
 	router := setupRouter(false)

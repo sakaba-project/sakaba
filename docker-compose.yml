@@ -12,15 +12,9 @@ services:
       - '8080:8080'
     volumes:
       - .:/go/src
-    environment:
-      TZ: Asia/Tokyo
+    env_file: .env.development
   db:
     image: mysql:8.0
     ports:
       - '3306:3306'
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: test_user
-      MYSQL_PASSWORD: test
-      MYSQL_DATABASE: test_db
-      TZ: Asia/Tokyo
+    env_file: .env.development
