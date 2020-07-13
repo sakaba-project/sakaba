@@ -1,0 +1,95 @@
+openapi: 3.0.0
+info:
+  title: sakaba-api
+  version: '1.0'
+  description: 'This is OpenAPI Document for sakaba-api (https://github.com/sakaba-project/sakaba)'
+  contact: {}
+servers:
+  - url: 'http://localhost:3000'
+components:
+  schemas:
+    user:
+      title: User
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        occupation:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    voice:
+      title: voice
+      type: object
+      properties:
+        id:
+          type: string
+        content:
+          type: string
+        type:
+          type: integer
+          description: '0 -> 声を出してほしい人のvoice, 1 -> アウトプットする人のvoice'
+        user_id:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    voice_tag:
+      title: voice_tag
+      type: object
+      properties:
+        voice_id:
+          type: string
+        tag_id:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    tag:
+      title: tag
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    output:
+      title: output
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        url:
+          type: string
+          format: uri
+        tag_id:
+          type: string
+        user_id:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+paths: {}
