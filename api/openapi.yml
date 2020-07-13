@@ -92,4 +92,169 @@ components:
         updated_at:
           type: string
           format: date-time
-paths: {}
+paths:
+  /users:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-users
+      description: Get a list of users
+    post:
+      summary: ''
+      operationId: post-users
+      responses:
+        '200':
+          description: OK
+      description: Create a new user
+  '/users/{user_id}':
+    parameters:
+      - schema:
+          type: string
+        name: user_id
+        in: path
+        required: true
+    delete:
+      summary: ''
+      operationId: delete-users-user_id
+      responses:
+        '200':
+          description: OK
+      description: Delete the user
+    patch:
+      summary: ''
+      operationId: patch-users-user_id
+      responses:
+        '200':
+          description: OK
+      description: Update the user info
+    get:
+      summary: ''
+      operationId: get-users-user_id
+      responses:
+        '200':
+          description: OK
+      description: Get the user
+  /voices:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-voices
+      description: Get a list of voices
+    post:
+      summary: ''
+      operationId: post-voices
+      responses:
+        '200':
+          description: OK
+      description: Create a new voice
+  '/voices/{voice_id}':
+    parameters:
+      - schema:
+          type: string
+        name: voice_id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-voices-voice_id
+      description: Get the voice
+    patch:
+      summary: ''
+      operationId: patch-voices-voice_id
+      responses:
+        '200':
+          description: OK
+      description: Update the voice info
+    delete:
+      summary: ''
+      operationId: delete-voices-voice_id
+      responses:
+        '200':
+          description: OK
+      description: Delete the voice
+  /tags:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tags
+      description: Get a list of tags
+    post:
+      summary: ''
+      operationId: post-tags
+      responses:
+        '200':
+          description: OK
+      description: Create a new tag
+  '/tags/{tag_id}':
+    parameters:
+      - schema:
+          type: string
+        name: tag_id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-tags-tag_id
+      description: Get the tag
+    patch:
+      summary: ''
+      operationId: patch-tags-tag_id
+      responses:
+        '200':
+          description: OK
+      description: Update the tag
+    delete:
+      summary: ''
+      operationId: delete-tags-tag_id
+      responses:
+        '200':
+          description: OK
+      description: Delete the tag
+  /outputs:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-outputs
+      description: Get outputs
+    post:
+      summary: ''
+      operationId: post-outputs
+      responses:
+        '200':
+          description: OK
+      description: Create a new output
+  '/outputs/{output_id}':
+    parameters:
+      - schema:
+          type: string
+        name: output_id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-outputs-output_id
+      description: Get the output
+    patch:
+      summary: ''
+      operationId: patch-outputs-output_id
+      responses:
+        '200':
+          description: OK
+      description: Update the output
+    delete:
+      summary: ''
+      operationId: delete-outputs-output_id
+      responses:
+        '200':
+          description: OK
+      description: Delete the output
