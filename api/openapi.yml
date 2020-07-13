@@ -43,20 +43,10 @@ components:
         updated_at:
           type: string
           format: date-time
-    voice_tag:
-      title: voice_tag
-      type: object
-      properties:
-        voice_id:
-          type: string
-        tag_id:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/tag'
     tag:
       title: tag
       type: object
@@ -71,6 +61,10 @@ components:
         updated_at:
           type: string
           format: date-time
+        voices:
+          type: array
+          items:
+            $ref: '#/components/schemas/voice'
     output:
       title: output
       type: object
@@ -97,16 +91,39 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/user'
       operationId: get-users
       description: Get a list of users
     post:
       summary: ''
+      tags: []
       operationId: post-users
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'
       description: Create a new user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                occupation:
+                  type: string
   '/users/{user_id}':
     parameters:
       - schema:
@@ -116,6 +133,7 @@ paths:
         required: true
     delete:
       summary: ''
+      tags: []
       operationId: delete-users-user_id
       responses:
         '200':
@@ -123,32 +141,79 @@ paths:
       description: Delete the user
     patch:
       summary: ''
+      tags: []
       operationId: patch-users-user_id
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'
       description: Update the user info
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                occupation:
+                  type: string
     get:
       summary: ''
+      tags: []
       operationId: get-users-user_id
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/user'
       description: Get the user
   /voices:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/voice'
       operationId: get-voices
       description: Get a list of voices
     post:
       summary: ''
+      tags: []
       operationId: post-voices
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/voice'
       description: Create a new voice
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                type:
+                  type: string
+                user_id:
+                  type: string
   '/voices/{voice_id}':
     parameters:
       - schema:
@@ -159,18 +224,42 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/voice'
       operationId: get-voices-voice_id
       description: Get the voice
     patch:
       summary: ''
+      tags: []
       operationId: patch-voices-voice_id
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/voice'
       description: Update the voice info
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                type:
+                  type: string
+                user_id:
+                  type: string
     delete:
       summary: ''
+      tags: []
       operationId: delete-voices-voice_id
       responses:
         '200':
@@ -180,16 +269,37 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/tag'
       operationId: get-tags
       description: Get a list of tags
     post:
       summary: ''
+      tags: []
       operationId: post-tags
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tag'
       description: Create a new tag
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
   '/tags/{tag_id}':
     parameters:
       - schema:
@@ -200,18 +310,40 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/tag'
       operationId: get-tags-tag_id
       description: Get the tag
     patch:
       summary: ''
+      tags: []
       operationId: patch-tags-tag_id
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tag'
       description: Update the tag
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
     delete:
       summary: ''
+      tags: []
       operationId: delete-tags-tag_id
       responses:
         '200':
@@ -221,16 +353,43 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/output'
       operationId: get-outputs
       description: Get outputs
     post:
       summary: ''
+      tags: []
       operationId: post-outputs
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/output'
       description: Create a new output
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                url:
+                  type: string
+                tag_id:
+                  type: string
+                user_id:
+                  type: string
   '/outputs/{output_id}':
     parameters:
       - schema:
@@ -241,18 +400,44 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/output'
       operationId: get-outputs-output_id
       description: Get the output
     patch:
       summary: ''
+      tags: []
       operationId: patch-outputs-output_id
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/output'
       description: Update the output
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                url:
+                  type: string
+                tag_id:
+                  type: string
+                user_id:
+                  type: string
     delete:
       summary: ''
+      tags: []
       operationId: delete-outputs-output_id
       responses:
         '200':
