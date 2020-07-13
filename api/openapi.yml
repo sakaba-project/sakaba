@@ -171,9 +171,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/user'
+                $ref: '#/components/schemas/user'
       description: Get the user
   /voices:
     get:
@@ -316,9 +314,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/tag'
+                $ref: '#/components/schemas/tag'
       operationId: get-tags-tag_id
       description: Get the tag
     patch:
