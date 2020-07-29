@@ -43,10 +43,6 @@ components:
         updated_at:
           type: string
           format: date-time
-        tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/tag'
     tag:
       title: tag
       type: object
@@ -61,10 +57,9 @@ components:
         updated_at:
           type: string
           format: date-time
-        voices:
-          type: array
-          items:
-            $ref: '#/components/schemas/voice'
+        voice_count:
+          type: integer
+      description: ''
     output:
       title: output
       type: object
@@ -86,6 +81,61 @@ components:
         updated_at:
           type: string
           format: date-time
+    page:
+      title: page
+      type: object
+      properties:
+        total:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+        has_previous:
+          type: boolean
+        has_next:
+          type: boolean
+    voice_with_tags:
+      title: voices_with_tag
+      type: object
+      properties:
+        id:
+          type: string
+        content:
+          type: string
+        type:
+          type: integer
+          description: '0 -> 声を出してほしい人のvoice, 1 -> アウトプットする人のvoice'
+        user_id:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/tag'
+    tag_with_voices:
+      title: tag_with_voices
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        voices_count:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        voices:
+          $ref: '#/components/schemas/voice'
 paths:
   /users:
     get:
@@ -183,11 +233,27 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/voice'
+                type: object
+                properties:
+                  voices:
+                    oneOf:
+                      - description: if attach_tags == false
+                        items:
+                          $ref: '#/components/schemas/voice'
+                      - description: if attach_tags == true
+                        items:
+                          $ref: '#/components/schemas/voice_with_tags'
+                    type: array
+                  page:
+                    $ref: '#/components/schemas/page'
       operationId: get-voices
       description: Get a list of voices
+      parameters:
+        - schema:
+            type: boolean
+          in: query
+          name: attach_tags
+          description: to get voices with tags
     post:
       summary: ''
       tags: []
@@ -273,11 +339,27 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/tag'
+                type: object
+                properties:
+                  tags:
+                    oneOf:
+                      - description: if attach_voices == false
+                        items:
+                          $ref: '#/components/schemas/tag'
+                      - description: if attach_voices == true
+                        items:
+                          $ref: '#/components/schemas/tag_with_voices'
+                    type: array
+                  page:
+                    $ref: '#/components/schemas/page'
       operationId: get-tags
       description: Get a list of tags
+      parameters:
+        - schema:
+            type: boolean
+          in: query
+          name: attach_voices
+          description: to get tags with voices
     post:
       summary: ''
       tags: []
